@@ -3,6 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Svg Icon Loader by cuixiping</title>
     <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
@@ -10,7 +11,21 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Svg Icon Loader by cuixiping</title>
+	<style>
+	button {
+		padding: 2px;
+		margin: 5px;
+		display: block;
+		float: left;
+		width: 48px;
+		height: 48px;
+	}
+	#buttons {
+		clear: both;
+		float: none;
+		overflow: auto;
+	}
+	</style>
   </head>
 
   <body>
@@ -31,15 +46,13 @@
         <hr>
 
         <section id="main_content">
-          <h1>
-<a name="svg-icon-loader-introduction" class="anchor" href="#svg-icon-loader-introduction"><span class="octicon octicon-link"></span></a>SVG Icon Loader Introduction</h1>
+          <h1>SVG Icon Loader Introduction</h1>
 
 <p>The SVG Icon Loader provides a method for a web interface to use SVG images as icons, while being loaded from a single file. This reduces the amount of HTTP requests, offering the same kind of benefit available with CSS sprites. If your server allows gzipping on SVG files, the file download is made a lot smaller since SVG files compress very well. </p>
 
 <p>This is a mirror of <a href="https://code.google.com/p/svg-icon-loader/">svg-icon-loader</a> from google code.</p>
 
-<h1>
-<a name="support" class="anchor" href="#support"><span class="octicon octicon-link"></span></a>Support</h1>
+<h1>Support</h1>
 
 <p>Successfully uses SVG images in the following browsers: </p>
 
@@ -47,18 +60,26 @@
 <li>  Firefox 1.5+*   Opera 9.6+*   Safari 3+*   Chrome 2+*   IE 6+ (with the Chrome Frame plugin)</li>
 </ul><p>In older browsers fallback images will be used instead (if specified) </p>
 
-<h1>
-<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h1>
+<h1>Demo</h1>
 
-<p><a href="http://svg-icon-loader.googlecode.com/svn/trunk/demo.html">Sample page</a> </p>
+	<div id="buttons">
+		<button id="square"></button>
+		<button id="circle"></button>
+		<button id="pencil"></button>
+		<button id="text"></button>
+		<button class="test"></button>
+		<button class="test"></button>
+		<button id="square2"></button>
+		<button class="test"></button>
+	</div>
 
-<h1>
-<a name="script" class="anchor" href="#script"><span class="octicon octicon-link"></span></a>Script</h1>
+<p><a href="demo.html">demo 1 (svg)</a> | <a href="demo2.html">demo 2 (svgz)</a></p>
 
-<p>The latest minified stable version (2.0) is available <a href="http://svg-icon-loader.googlecode.com/files/jquery.svgicons-2.0.min.js">here</a>. If you are interested in seeing the latest uncompressed developer version, see <a href="http://svg-icon-loader.googlecode.com/svn/trunk/jquery.svgicons.js">here</a>. </p>
+<h1>Script</h1>
 
-<h1>
-<a name="using-the-script" class="anchor" href="#using-the-script"><span class="octicon octicon-link"></span></a>Using the script</h1>
+<p>The latest minified stable version (2.0) is available <a href="http://svg-icon-loader.googlecode.com/files/jquery.svgicons-2.0.min.js">here</a>. If you are interested in seeing the latest uncompressed developer version, see <a href="jquery.svgicons.js">here</a>. </p>
+
+<h1>Using the script</h1>
 
 <ol>
 <li>Create the SVG master file that includes all icons: </li>
@@ -100,8 +121,9 @@
 <p>$.resizeSvgIcons(resizeOptions) (use the same way as the "resize" parameter)</p>
 </blockquote>
 </li>
-</ol><h2>
-<a name="example-usage-1" class="anchor" href="#example-usage-1"><span class="octicon octicon-link"></span></a>Example usage #1</h2>
+</ol>
+
+<h2>Example usage #1</h2>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svg'</span><span class="p">);</span> <span class="c1">// The SVG file that contains all icons</span>
@@ -110,8 +132,7 @@
 <span class="p">});</span>
 </pre></div>
 
-<h2>
-<a name="example-usage-2" class="anchor" href="#example-usage-2"><span class="octicon octicon-link"></span></a>Example usage #2</h2>
+<h2>Example usage #2</h2>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svg'</span><span class="p">,</span> <span class="p">{</span> <span class="c1">// The SVG file that contains all icons</span>
@@ -127,8 +148,7 @@
 <span class="p">});</span>
 </pre></div>
 
-<h2>
-<a name="example-usage-3" class="anchor" href="#example-usage-3"><span class="octicon octicon-link"></span></a>Example usage #3</h2>
+<h2>Example usage #3</h2>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svgz'</span><span class="p">,</span> <span class="p">{</span> <span class="c1">// The SVGZ file that contains all icons</span>
@@ -162,5 +182,31 @@
         
       </div>
     </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script src="jquery.svgicons.js"></script>
+<script>
+
+$(function() {
+
+	$.svgIcons('images/icons.svg', {
+		w:32, h:32,
+		fallback_path:'images/',
+		fallback:{
+			'square':'square.png',
+			'circle':'circle.png',
+			'pencil':'path.png',
+			'text':'text.png'
+		},
+		placement: {
+			'.test':'circle'
+		},
+		callback: function(icons) {
+			var sq2 = icons['square'].clone();
+			$('#square2').append(sq2);
+		}
+	});
+});
+
+</script>
   </body>
 </html>
