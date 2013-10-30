@@ -134,11 +134,10 @@ $(function() {
 		var svgns = "http://www.w3.org/2000/svg",
 			xlinkns = "http://www.w3.org/1999/xlink",
 			xmlns = "http://www.w3.org/2000/xmlns/",
-			icon_w = opts.w?opts.w : 24,
-			icon_h = opts.h?opts.h : 24,
+			icon_w = opts.w || 24,
+			icon_h = opts.h || 24,
 			elems, svgdoc, testImg,
 			icons_made = false, data_loaded = false, load_attempts = 0,
-			ua = navigator.userAgent, isOpera = !!window.opera, isSafari = (ua.indexOf('Safari/') > -1 && ua.indexOf('Chrome/')==-1),
 			data_pre = 'data:image/svg+xml;charset=utf-8;base64,';
 
 			if(opts.svgz) {
@@ -210,7 +209,6 @@ $(function() {
 			var holder;
 
 			var setIcon = function(target, icon, id, setID) {
-				if(isOpera) icon.css('visibility','hidden');
 				if(opts.replace) {
 					if(setID) icon.attr('id',id);
 					var cl = target.attr('class');
@@ -218,11 +216,6 @@ $(function() {
 					target.replaceWith(icon);
 				} else {
 					target.append(icon);
-				}
-				if(isOpera) {
-					setTimeout(function() {
-						icon.attr('style','visibility:visible;');
-					},1);
 				}
 			}
 
@@ -255,7 +248,7 @@ $(function() {
 					holder = $('#' + id);
 
 					var svg = elem.getElementsByTagNameNS(svgns, 'svg')[0];
-					var svgcontent = '<svg id="root" width="'+icon_w+'" height="'+icon_h+'" viewBox="0 0 '+icon_w+' '+icon_h+'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svg_icon">' + (new XMLSerializer()).serializeToString(svg) +'</svg>';
+					var svgcontent = '<svg width="'+icon_w+'" height="'+icon_h+'" viewBox="0 0 '+icon_w+' '+icon_h+'" xmlns="'+svgns+'" xmlns:xlink="'+xlinkns+'" class="svg_icon">' + (new XMLSerializer()).serializeToString(svg) +'</svg>';
 
 					if(toImage) {
 						var str = data_pre + encode64(svgcontent);
@@ -299,7 +292,6 @@ $(function() {
 			defs.find('[id]').each(function(i) {
 				var id = this.id;
 				var no_dupes = ($(svgdoc).find('#' + id).length <= 1);
-				if(isOpera) no_dupes = false; // Opera didn't clone svg_el, so not reliable
 				if(!force && no_dupes) return;
 				var new_id = id + svg_num + i;
 				$(this).attr('id', new_id);

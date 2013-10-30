@@ -1,3 +1,12 @@
-create svgz via gzip command line
+command lines
 
-> gzip -k -N -9 icons.svg
+create svgz
+> D:\DevTools\gzip-1.3.12\gzip.exe -k -N -9 icons.svg
+
+
+minify js
+> F:\nodejs\nodejs\uglifyjs jquery.svgicons.js -o jquery.svgicons-2.1.min.js
+
+
+compress gz
+> D:\DevTools\gzip-1.3.12\gzip.exe  -k -N -9 jquery.svgicons-2.1.min.js
