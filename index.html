@@ -100,16 +100,16 @@
 <p>All options are optional and can include: </p>
 
 <ul>
-<li>'w (number)': The icon widths (default: 24px)</li>
-<li>'h (number)': The icon heights (default: 24px)</li>
-<li>'fallback (object literal)': List of raster images with each key being the SVG icon ID to replace, and the value the image file name.</li>
-<li>'fallback_path (string)': The path to use for all images listed under "fallback"</li>
-<li>'replace (boolean)': If set to true, HTML elements will be replaced by, rather than include the SVG icon.</li>
-<li>'placement (object literal)': List with selectors for keys and SVG icon ids&gt; as values. This provides a custom method of adding icons.</li>
-<li>'callback (function)': A function to call when all icons have been loaded</li>
-<li>'id_match (boolean)': Automatically attempt to match SVG icon ids with&gt; corresponding HTML id (default: true)</li>
-<li>'no_img (boolean)': Prevent attempting to convert the icon into an <tt>&lt;img&gt;</tt> element (may be faster, help for browser consistency)</li>
-<li>'svgz (boolean)': Indicate that the file is an SVGZ file, and thus not to parse as XML. SVGZ files add compression benefits, but getting data from them fails in Firefox 2 and older.</li>
+<li><tt>'w (number)'</tt>: The icon widths (default: 24px)</li>
+<li><tt>'h (number)'</tt>: The icon heights (default: 24px)</li>
+<li><tt>'fallback (object literal)'</tt>: List of raster images with each key being the SVG icon ID to replace, and the value the image file name.</li>
+<li><tt>'fallback_path (string)'</tt>: The path to use for all images listed under "fallback"</li>
+<li><tt>'replace (boolean)'</tt>: If set to true, HTML elements will be replaced by, rather than include the SVG icon.</li>
+<li><tt>'placement (object literal)'</tt>: List with selectors for keys and SVG icon ids as values. This provides a custom method of adding icons.</li>
+<li><tt>'callback (function)'</tt>: A function to call when all icons have been loaded</li>
+<li><tt>'id_match (boolean)'</tt>: Automatically attempt to match SVG icon ids with corresponding HTML id (default: true)</li>
+<li><tt>'no_img (boolean)'</tt>: Prevent attempting to convert the icon into an <tt>&lt;img&gt;</tt> element (may be faster, help for browser consistency)</li>
+<li><tt>'svgz (boolean)'</tt>: Indicate that the file is an SVGZ file, and thus not to parse as XML. SVGZ files add compression benefits, but getting data from them fails in Firefox 2 and older.</li>
 </ul>
 
 <ol>
@@ -122,7 +122,7 @@
 <li>To resize icons at a later point without using the callback, use this: 
 
 <blockquote>
-<p>$.resizeSvgIcons(resizeOptions) (use the same way as the "resize" parameter)</p>
+<p><tt>$.resizeSvgIcons(resizeOptions)</tt> (use the same way as the "resize" parameter)</p>
 </blockquote>
 </li>
 </ol>
