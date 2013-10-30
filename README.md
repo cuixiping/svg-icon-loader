@@ -1,8 +1,8 @@
-# SVG Icon Loader Introduction
+# Introduction
 
-The SVG Icon Loader provides a method for a web interface to use SVG images as icons, while being loaded from a single file. This reduces the amount of HTTP requests, offering the same kind of benefit available with CSS sprites. If your server allows gzipping on SVG files, the file download is made a lot smaller since SVG files compress very well. 
+The **SVG Icon Loader** provides a method for a web interface to use SVG images as icons, while being loaded from a single file. This reduces the amount of HTTP requests, offering the same kind of benefit available with CSS sprites. If your server allows gzipping on SVG files, the file download is made a lot smaller since SVG files compress very well. This is a mirror of [svg-icon-loader](https://code.google.com/p/svg-icon-loader/) from google code.
 
-This is a mirror of [svg-icon-loader](https://code.google.com/p/svg-icon-loader/) from google code.
+[Home Page](http://cuixiping.github.io/svg-icon-loader/)
 
 # Support
 
@@ -14,11 +14,11 @@ In older browsers fallback images will be used instead (if specified)
 
 # Demo
 
-[Sample page](http://svg-icon-loader.googlecode.com/svn/trunk/demo.html) 
+[demo 1 (svg)](http://cuixiping.github.io/svg-icon-loader/demo.html) &nbsp;|&nbsp;  [demo 2 (svgz)](http://cuixiping.github.io/svg-icon-loader/demo2.html)
 
 # Script
 
-The latest minified stable version (2.0) is available [here](http://svg-icon-loader.googlecode.com/files/jquery.svgicons-2.0.min.js). If you are interested in seeing the latest uncompressed developer version, see [here](http://svg-icon-loader.googlecode.com/svn/trunk/jquery.svgicons.js). 
+The latest minified stable version (2.0) is available [here](https://github.com/cuixiping/svg-icon-loader/blob/master/jquery.svgicons.min.js.gz). If you are interested in seeing the latest uncompressed developer version, see [here](https://github.com/cuixiping/svg-icon-loader/blob/master/jquery.svgicons.js). 
 
 # Using the script
 
@@ -30,86 +30,86 @@ The master SVG icon-containing file is an SVG file that contains  <tt>&lt;g&gt;<
 
 3. Include the jQuery and the SVG Icon Loader scripts on your page. 
 
-4. Run $.svgIcons() when the document is ready: 
+4. Run `$.svgIcons()` when the document is ready: 
 
-$.svgIcons( file string, options literal); 
+   `$.svgIcons( file string, options literal);`
 
 File is the location of a local SVG or SVGz file. 
 
 All options are optional and can include: 
 
-*   'w (number)': The icon widths (default: 24px)
+*   `'w (number)'`: The icon widths (default: 24px)
 
-*   'h (number)': The icon heights (default: 24px)
+*   `'h (number)'`: The icon heights (default: 24px)
 
-*   'fallback (object literal)': List of raster images with each key being the SVG icon ID to replace, and the value the image file name.
+*   `'fallback (object literal)'`: List of raster images with each key being the SVG icon ID to replace, and the value the image file name.
 
-*   'fallback_path (string)': The path to use for all images listed under "fallback"	 
+*   `'fallback_path (string)'`: The path to use for all images listed under "fallback"	 
 
-*   'replace (boolean)': If set to true, HTML elements will be replaced by, rather than include the SVG icon.
+*   `'replace (boolean)'`: If set to true, HTML elements will be replaced by, rather than include the SVG icon.
 
-*   'placement (object literal)': List with selectors for keys and SVG icon ids> as values. This provides a custom method of adding icons.
+*   `'placement (object literal)'`: List with selectors for keys and SVG icon ids as values. This provides a custom method of adding icons.
 
-*   'callback (function)': A function to call when all icons have been loaded
+*   `'callback (function)'`: A function to call when all icons have been loaded
 
-*   'id_match (boolean)': Automatically attempt to match SVG icon ids with> corresponding HTML id (default: true)
+*   `'id_match (boolean)'`: Automatically attempt to match SVG icon ids with corresponding HTML id (default: true)
 
-*   'no_img (boolean)': Prevent attempting to convert the icon into an <tt>&lt;img&gt;</tt> element (may be faster, help for browser consistency)
+*   `'no_img (boolean)'`: Prevent attempting to convert the icon into an <tt>&lt;img&gt;</tt> element (may be faster, help for browser consistency)
 
-*   'svgz (boolean)': Indicate that the file is an SVGZ file, and thus not to parse as XML. SVGZ files add compression benefits, but getting data from them fails in Firefox 2 and older.
+*   `'svgz (boolean)'`: Indicate that the file is an SVGZ file, and thus not to parse as XML. SVGZ files add compression benefits, but getting data from them fails in Firefox 2 and older.
 
 5. To access an icon at a later point without using the callback, use this: 
-> <tt>$.getSvgIcon(id (string))</tt>. This will return the icon (as jQuery object) with a given ID.
+> `$.getSvgIcon(id (string))`. This will return the icon (as jQuery object) with a given ID.
 
 6. To resize icons at a later point without using the callback, use this: 
-> $.resizeSvgIcons(resizeOptions) (use the same way as the "resize" parameter)
+> `$.resizeSvgIcons(resizeOptions)` (use the same way as the "resize" parameter)
 
 ## Example usage #1
 ```javascript
 $(function() {
-        $.svgIcons('my_icon_set.svg'); // The SVG file that contains all icons
-        // No options have been set, so all icons will automatically be inserted 
-        // into HTML elements that match the same IDs. 
+    $.svgIcons('my_icon_set.svg'); // The SVG file that contains all icons
+    // No options have been set, so all icons will automatically be inserted 
+    // into HTML elements that match the same IDs. 
 });
 ```
 
 ## Example usage #2
 ```javascript
 $(function() {
-        $.svgIcons('my_icon_set.svg', { // The SVG file that contains all icons
-                callback: function(icons) { // Custom callback function that sets click
-                                            // events for each icon
-                        $.each(icons, function(id, icon) {
-                                icon.click(function() {
-                                        alert('You clicked on the icon with id ' + id);
-                                });
-                        });
-                }
-        }); //The SVG file that contains all icons
+    $.svgIcons('my_icon_set.svg', { // The SVG file that contains all icons
+        callback: function(icons) { // Custom callback function that sets click
+                        // events for each icon
+            $.each(icons, function(id, icon) {
+                icon.click(function() {
+                    alert('You clicked on the icon with id ' + id);
+                });
+            });
+        }
+    }); //The SVG file that contains all icons
 });
 ```
 
 ## Example usage #3
 ```javascript
 $(function() {
-        $.svgIcons('my_icon_set.svgz', { // The SVGZ file that contains all icons
-                w: 32,  // All icons will be 32px wide
-                h: 32,  // All icons will be 32px high
-                fallback_path: 'icons/',  // All fallback files can be found here
-                fallback: {
-                        '#open_icon': 'open.png',  // The "open.png" will be appended to the
-                                                   // HTML element with ID "open_icon"
-                        '#close_icon': 'close.png',
-                        '#save_icon': 'save.png'
-                },
-                placement: {'.open_icon','open'}, // The "open" icon will be added
-                                                  // to all elements with class "open_icon"
-                callback: function(icons) {
-                        icons['open']
-                                .width(64)
-                                .height(64); // Sets different width/height for "open" icon 
-                },
-                svgz: true // Indicates that an SVGZ file is being used
-        })
+    $.svgIcons('my_icon_set.svgz', { // The SVGZ file that contains all icons
+        w: 32,  // All icons will be 32px wide
+        h: 32,  // All icons will be 32px high
+        fallback_path: 'icons/',  // All fallback files can be found here
+        fallback: {
+            '#open_icon': 'open.png',  // The "open.png" will be appended to the
+                           // HTML element with ID "open_icon"
+            '#close_icon': 'close.png',
+            '#save_icon': 'save.png'
+        },
+        placement: {'.open_icon','open'}, // The "open" icon will be added
+                          // to all elements with class "open_icon"
+        callback: function(icons) {
+            icons['open']
+                .width(64)
+                .height(64); // Sets different width/height for "open" icon 
+        },
+        svgz: true // Indicates that an SVGZ file is being used
+    })
 });
 ```
