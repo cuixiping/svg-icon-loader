@@ -1,6 +1,3 @@
-svg-icon-loader
-===============
-
 # SVG Icon Loader Introduction
 
 The SVG Icon Loader provides a method for a web interface to use SVG images as icons, while being loaded from a single file. This reduces the amount of HTTP requests, offering the same kind of benefit available with CSS sprites. If your server allows gzipping on SVG files, the file download is made a lot smaller since SVG files compress very well. 
