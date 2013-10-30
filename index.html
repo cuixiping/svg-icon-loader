@@ -73,49 +73,53 @@
 		<button class="test"></button>
 	</div>
 
-<p><a href="demo.html">demo 1 (svg)</a> | <a href="demo2.html">demo 2 (svgz)</a></p>
+<p><a href="demo.html">demo 1 (svg)</a> &nbsp;|&nbsp; <a href="demo2.html">demo 2 (svgz)</a></p>
 
 <h1>Script</h1>
 
-<p>The latest minified stable version (2.0) is available <a href="http://svg-icon-loader.googlecode.com/files/jquery.svgicons-2.0.min.js">here</a>. If you are interested in seeing the latest uncompressed developer version, see <a href="jquery.svgicons.js">here</a>. </p>
+<p>The latest minified stable version (2.0) is available <a href="jquery.svgicons-2.0.min.js">here</a>. If you are interested in seeing the latest uncompressed developer version, see <a href="jquery.svgicons.js">here</a>. </p>
 
 <h1>Using the script</h1>
 
 <ol>
 <li>Create the SVG master file that includes all icons: </li>
-</ol><p>The master SVG icon-containing file is an SVG file that contains  <tt>&lt;g&gt;</tt> elements. Each <tt>&lt;g&gt;</tt> element should contain the markup of an SVG icon. The <tt>&lt;g&gt;</tt> element has an ID that should  correspond with the ID of the HTML element used on the page that should contain  or optionally be replaced by the icon. Additionally, one empty element should be added at the end with id "svg_eof". </p>
+</ol>
+
+<p>The master SVG icon-containing file is an SVG file that contains  <tt>&lt;g&gt;</tt> elements. Each <tt>&lt;g&gt;</tt> element should contain the markup of an SVG icon. The <tt>&lt;g&gt;</tt> element has an ID that should  correspond with the ID of the HTML element used on the page that should contain  or optionally be replaced by the icon. Additionally, one empty element should be added at the end with id "svg_eof". </p>
 
 <ol>
-<li><p>Optionally create fallback raster images for each SVG icon. </p></li>
-<li><p>Include the jQuery and the SVG Icon Loader scripts on your page. </p></li>
-<li><p>Run $.svgIcons() when the document is ready: </p></li>
-</ol><p>$.svgIcons( file string, options literal); </p>
+<li>Optionally create fallback raster images for each SVG icon.</li>
+<li>Include the jQuery and the SVG Icon Loader scripts on your page.</li>
+<li>Run $.svgIcons() when the document is ready:</li>
+</ol>
+
+<p>$.svgIcons( file string, options literal); </p>
 
 <p>File is the location of a local SVG or SVGz file. </p>
 
 <p>All options are optional and can include: </p>
 
 <ul>
-<li><p>'w (number)': The icon widths (default: 24px)</p></li>
-<li><p>'h (number)': The icon heights (default: 24px)</p></li>
-<li><p>'fallback (object literal)': List of raster images with each key being the SVG icon ID to replace, and the value the image file name.</p></li>
-<li><p>'fallback_path (string)': The path to use for all images listed under "fallback"     </p></li>
-<li><p>'replace (boolean)': If set to true, HTML elements will be replaced by, rather than include the SVG icon.</p></li>
-<li><p>'placement (object literal)': List with selectors for keys and SVG icon ids&gt; as values. This provides a custom method of adding icons.</p></li>
-<li><p>'callback (function)': A function to call when all icons have been loaded</p></li>
-<li><p>'id_match (boolean)': Automatically attempt to match SVG icon ids with&gt; corresponding HTML id (default: true)</p></li>
-<li><p>'no_img (boolean)': Prevent attempting to convert the icon into an <tt>&lt;img&gt;</tt> element (may be faster, help for browser consistency)</p></li>
-<li><p>'svgz (boolean)': Indicate that the file is an SVGZ file, and thus not to parse as XML. SVGZ files add compression benefits, but getting data from them fails in Firefox 2 and older.</p></li>
-</ul><ol>
-<li>
-<p>To access an icon at a later point without using the callback, use this: </p>
+<li>'w (number)': The icon widths (default: 24px)</li>
+<li>'h (number)': The icon heights (default: 24px)</li>
+<li>'fallback (object literal)': List of raster images with each key being the SVG icon ID to replace, and the value the image file name.</li>
+<li>'fallback_path (string)': The path to use for all images listed under "fallback"</li>
+<li>'replace (boolean)': If set to true, HTML elements will be replaced by, rather than include the SVG icon.</li>
+<li>'placement (object literal)': List with selectors for keys and SVG icon ids&gt; as values. This provides a custom method of adding icons.</li>
+<li>'callback (function)': A function to call when all icons have been loaded</li>
+<li>'id_match (boolean)': Automatically attempt to match SVG icon ids with&gt; corresponding HTML id (default: true)</li>
+<li>'no_img (boolean)': Prevent attempting to convert the icon into an <tt>&lt;img&gt;</tt> element (may be faster, help for browser consistency)</li>
+<li>'svgz (boolean)': Indicate that the file is an SVGZ file, and thus not to parse as XML. SVGZ files add compression benefits, but getting data from them fails in Firefox 2 and older.</li>
+</ul>
+
+<ol>
+<li>To access an icon at a later point without using the callback, use this:
 
 <blockquote>
 <p><tt>$.getSvgIcon(id (string))</tt>. This will return the icon (as jQuery object) with a given ID.</p>
 </blockquote>
 </li>
-<li>
-<p>To resize icons at a later point without using the callback, use this: </p>
+<li>To resize icons at a later point without using the callback, use this: 
 
 <blockquote>
 <p>$.resizeSvgIcons(resizeOptions) (use the same way as the "resize" parameter)</p>
@@ -126,50 +130,50 @@
 <h2>Example usage #1</h2>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svg'</span><span class="p">);</span> <span class="c1">// The SVG file that contains all icons</span>
-        <span class="c1">// No options have been set, so all icons will automatically be inserted </span>
-        <span class="c1">// into HTML elements that match the same IDs. </span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svg'</span><span class="p">);</span> <span class="c1">// The SVG file that contains all icons</span>
+    <span class="c1">// No options have been set, so all icons will automatically be inserted </span>
+    <span class="c1">// into HTML elements that match the same IDs. </span>
 <span class="p">});</span>
 </pre></div>
 
 <h2>Example usage #2</h2>
 
 <div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svg'</span><span class="p">,</span> <span class="p">{</span> <span class="c1">// The SVG file that contains all icons</span>
-                <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">icons</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Custom callback function that sets click</span>
-                                            <span class="c1">// events for each icon</span>
-                        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">icons</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
-                                <span class="nx">icon</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-                                        <span class="nx">alert</span><span class="p">(</span><span class="s1">'You clicked on the icon with id '</span> <span class="o">+</span> <span class="nx">id</span><span class="p">);</span>
-                                <span class="p">});</span>
-                        <span class="p">});</span>
-                <span class="p">}</span>
-        <span class="p">});</span> <span class="c1">//The SVG file that contains all icons</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svg'</span><span class="p">,</span> <span class="p">{</span> <span class="c1">// The SVG file that contains all icons</span>
+        <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">icons</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Custom callback function that sets click</span>
+            <span class="c1">// events for each icon</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">icons</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">icon</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="nx">alert</span><span class="p">(</span><span class="s1">'You clicked on the icon with id '</span> <span class="o">+</span> <span class="nx">id</span><span class="p">);</span>
+                <span class="p">});</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">});</span> <span class="c1">//The SVG file that contains all icons</span>
 <span class="p">});</span>
 </pre></div>
 
 <h2>Example usage #3</h2>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svgz'</span><span class="p">,</span> <span class="p">{</span> <span class="c1">// The SVGZ file that contains all icons</span>
-                <span class="nx">w</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>  <span class="c1">// All icons will be 32px wide</span>
-                <span class="nx">h</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>  <span class="c1">// All icons will be 32px high</span>
-                <span class="nx">fallback_path</span><span class="o">:</span> <span class="s1">'icons/'</span><span class="p">,</span>  <span class="c1">// All fallback files can be found here</span>
-                <span class="nx">fallback</span><span class="o">:</span> <span class="p">{</span>
-                        <span class="s1">'#open_icon'</span><span class="o">:</span> <span class="s1">'open.png'</span><span class="p">,</span>  <span class="c1">// The "open.png" will be appended to the</span>
-                                                   <span class="c1">// HTML element with ID "open_icon"</span>
-                        <span class="s1">'#close_icon'</span><span class="o">:</span> <span class="s1">'close.png'</span><span class="p">,</span>
-                        <span class="s1">'#save_icon'</span><span class="o">:</span> <span class="s1">'save.png'</span>
-                <span class="p">},</span>
-                <span class="nx">placement</span><span class="o">:</span> <span class="p">{</span><span class="s1">'.open_icon'</span><span class="p">,</span><span class="s1">'open'</span><span class="p">},</span> <span class="c1">// The "open" icon will be added</span>
-                                                  <span class="c1">// to all elements with class "open_icon"</span>
-                <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">icons</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="nx">icons</span><span class="p">[</span><span class="s1">'open'</span><span class="p">]</span>
-                                <span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
-                                <span class="p">.</span><span class="nx">height</span><span class="p">(</span><span class="mi">64</span><span class="p">);</span> <span class="c1">// Sets different width/height for "open" icon </span>
-                <span class="p">},</span>
-                <span class="nx">svgz</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// Indicates that an SVGZ file is being used</span>
-        <span class="p">})</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span	class="p">(</span><span	class="kd">function</span><span	class="p">()</span>	<span class="p">{</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svgz'</span><span class="p">,</span> <span class="p">{</span> <span class="c1">// The SVGZ file that contains all icons</span>
+        <span class="nx">w</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>  <span class="c1">// All icons will be 32px wide</span>
+        <span class="nx">h</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>  <span class="c1">// All icons will be 32px high</span>
+        <span class="nx">fallback_path</span><span class="o">:</span> <span class="s1">'icons/'</span><span class="p">,</span>  <span class="c1">// All fallback files can be found here</span>
+        <span class="nx">fallback</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s1">'#open_icon'</span><span class="o">:</span> <span class="s1">'open.png'</span><span class="p">,</span>  <span class="c1">// The "open.png" will be appended to the</span>
+                                      <span class="c1">// HTML element with ID "open_icon"</span>
+            <span class="s1">'#close_icon'</span><span class="o">:</span> <span class="s1">'close.png'</span><span class="p">,</span>
+            <span class="s1">'#save_icon'</span><span class="o">:</span> <span class="s1">'save.png'</span>
+        <span class="p">},</span>
+        <span class="nx">placement</span><span class="o">:</span> <span class="p">{</span><span class="s1">'.open_icon'</span><span class="p">,</span><span class="s1">'open'</span><span class="p">},</span> <span class="c1">// The "open" icon will be added</span>
+                                          <span class="c1">// to all elements with class "open_icon"</span>
+        <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">icons</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">icons</span><span class="p">[</span><span class="s1">'open'</span><span class="p">]</span>
+                <span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">height</span><span class="p">(</span><span class="mi">64</span><span class="p">);</span> <span class="c1">// Sets different width/height for "open" icon </span>
+        <span class="p">},</span>
+        <span class="nx">svgz</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// Indicates that an SVGZ file is being used</span>
+    <span class="p">})</span>
 <span class="p">});</span>
 </pre></div>
         </section>
