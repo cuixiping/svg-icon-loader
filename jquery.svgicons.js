@@ -12,10 +12,10 @@ How to use:
 
 1. Create the SVG master file that includes all icons:
 
-The master SVG icon-containing file is an SVG file that contains 
+The master SVG icon-containing file is an SVG file that contains
 <g> elements. Each <g> element should contain the markup of an SVG
-icon. The <g> element has an ID that should 
-correspond with the ID of the HTML element used on the page that should contain 
+icon. The <g> element has an ID that should
+correspond with the ID of the HTML element used on the page that should contain
 or optionally be replaced by the icon. Additionally, one empty element should be
 added at the end with id "svg_eof".
 
@@ -37,10 +37,10 @@ All options are optional and can include:
 
 - 'fallback (object literal)': List of raster images with each
 	key being the SVG icon ID to replace, and the value the image file name.
-	
+
 - 'fallback_path (string)': The path to use for all images
 	listed under "fallback"
-	
+
 - 'replace (boolean)': If set to true, HTML elements will be replaced by,
 	rather than include the SVG icon.
 
@@ -49,14 +49,14 @@ All options are optional and can include:
 
 - 'resize (object literal)': List with selectors for keys and numbers
 	as values. This allows an easy way to resize specific icons.
-	
-- 'callback (function)': A function to call when all icons have been loaded. 
-	Includes an object literal as its argument with as keys all icon IDs and the 
+
+- 'callback (function)': A function to call when all icons have been loaded.
+	Includes an object literal as its argument with as keys all icon IDs and the
 	icon as a jQuery object as its value.
 
 - 'id_match (boolean)': Automatically attempt to match SVG icon ids with
 	corresponding HTML id (default: true)
-	
+
 - 'no_img (boolean)': Prevent attempting to convert the icon into an <img>
 	element (may be faster, help for browser consistency)
 
@@ -68,7 +68,7 @@ All options are optional and can include:
 	$.getSvgIcon(id (string));
 
 This will return the icon (as jQuery object) with a given ID.
-	
+
 6. To resize icons at a later point without using the callback, use this:
 	$.resizeSvgIcons(resizeOptions) (use the same way as the "resize" parameter)
 
@@ -77,8 +77,8 @@ Example usage #1:
 
 $(function() {
 	$.svgIcons('my_icon_set.svg'); // The SVG file that contains all icons
-	// No options have been set, so all icons will automatically be inserted 
-	// into HTML elements that match the same IDs. 
+	// No options have been set, so all icons will automatically be inserted
+	// into HTML elements that match the same IDs.
 });
 
 Example usage #2:
@@ -114,13 +114,13 @@ $(function() {
 		resize: function() {
 			'#save_icon .svg_icon': 64  // The "save" icon will be resized to 64 x 64px
 		},
-		
-		callback: function(icons) { // Sets background color for "close" icon 
+
+		callback: function(icons) { // Sets background color for "close" icon
 			icons['close'].css('background','red');
 		},
-		
+
 		svgz: true // Indicates that an SVGZ file is being used
-		
+
 	})
 });
 
@@ -133,15 +133,16 @@ $(function() {
 	$.svgIcons = function(file, opts) {
 		var svgns = "http://www.w3.org/2000/svg",
 			xlinkns = "http://www.w3.org/1999/xlink",
+			xmlns = "http://www.w3.org/2000/xmlns/",
 			icon_w = opts.w?opts.w : 24,
 			icon_h = opts.h?opts.h : 24,
 			elems, svgdoc, testImg,
 			icons_made = false, data_loaded = false, load_attempts = 0,
 			ua = navigator.userAgent, isOpera = !!window.opera, isSafari = (ua.indexOf('Safari/') > -1 && ua.indexOf('Chrome/')==-1),
 			data_pre = 'data:image/svg+xml;charset=utf-8;base64,';
-			
+
 			if(opts.svgz) {
-				var data_el = $('<object data="' + file + '" type=image/svg+xml>').appendTo('body').hide();
+				var data_el = $('<object data="' + file + '" type=image/svg+xml></object>').appendTo('body').hide();
 				try {
 					svgdoc = data_el[0].contentDocument;
 					// TODO: IE still loads this, shouldn't even bother.
@@ -167,12 +168,12 @@ $(function() {
 					}
 				});
 			}
-			
+
 		function getIcons(evt, no_wait) {
 			if(evt !== 'ajax') {
 				if(data_loaded) return;
 				// Webkit sometimes says svgdoc is undefined, other times
-				// it fails to load all nodes. Thus we must make sure the "eof" 
+				// it fails to load all nodes. Thus we must make sure the "eof"
 				// element is loaded.
 				svgdoc = data_el[0].contentDocument; // Needed again for Webkit
 				var isReady = (svgdoc && svgdoc.getElementById('svg_eof'));
@@ -188,47 +189,26 @@ $(function() {
 				}
 				data_loaded = true;
 			}
-			// Clean source SVGs (mostly for Inkscape files)
-			// TODO: Find a way to do this without crashing Safari (when converting to IMG)
-			$(svgdoc).find('metadata').remove().end()
-				.find('*').each(function(i, el) {
-				if(el.nodeName.indexOf(':') != -1) {
-					$(el).remove();
-				}
-				var attrs = $.extend(false, el.attributes, {});
-				for(i in attrs) {
-					var attr = attrs[i];
-					var fullattr = attr.prefix?attr.prefix + ':' + attr.localName:'';
-					if(attr.prefix) {
-						el.removeAttribute(attr.localName); // for Opera
-						el.removeAttribute(fullattr); // for Webkit
-					} 
-					if(fullattr == 'xlink:href') {
-						el.setAttribute('xlink:href', attr.nodeValue);
-					}
-				}
-			});
-			elems = $(svgdoc.firstChild).children(); //.getElementsByTagName('foreignContent');
+			elems = $(svgdoc.firstChild).children();
 			var testSrc = data_pre + 'PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNzUiIGhlaWdodD0iMjc1Ij48L3N2Zz4%3D';
-			
+
 			testImg = $(new Image()).attr({
 				src: testSrc,
 				width: 0,
 				height: 0
 			}).appendTo('body')
 			.load(function () {
-				// Safari 4 crashes, Opera and Chrome don't
-				makeIcons(!isSafari);
+				makeIcons(true);
 			}).error(function () {
 				makeIcons();
 			});
 		}
-		
+
 		function makeIcons(toImage, fallback) {
 			if(icons_made) return;
 			if(opts.no_img) toImage = false;
 			var holder;
-			
+
 			var setIcon = function(target, icon, id, setID) {
 				if(isOpera) icon.css('visibility','hidden');
 				if(opts.replace) {
@@ -237,7 +217,6 @@ $(function() {
 					if(cl) icon.attr('class','svg_icon '+cl);
 					target.replaceWith(icon);
 				} else {
-					
 					target.append(icon);
 				}
 				if(isOpera) {
@@ -246,18 +225,14 @@ $(function() {
 					},1);
 				}
 			}
-			
+
 			var addIcon = function(icon, id) {
 				if(opts.id_match === undefined || opts.id_match !== false) {
 					setIcon(holder, icon, id, true);
 				}
 				svg_icons[id] = icon;
 			}
-			
-			if(toImage) {
-				var temp_holder = $(document.createElement('div'));
-				temp_holder.hide().appendTo('body');
-			} 
+
 			if(fallback) {
 				var path = opts.fallback_path?opts.fallback_path:'';
 				$.each(fallback, function(id, imgsrc) {
@@ -270,7 +245,7 @@ $(function() {
 							'height': icon_h,
 							'alt': 'icon'
 						});
-					
+
 					addIcon(icon, id);
 				});
 			} else {
@@ -278,40 +253,23 @@ $(function() {
 					var id = elem.getAttribute('id');
 					if(id == 'svg_eof') return;
 					holder = $('#' + id);
-			
-					var svg = elem.getElementsByTagNameNS(svgns, 'svg')[0];
-					var svgroot = svgdoc.createElementNS(svgns, "svg");
-					svgroot.setAttributeNS(svgns, 'viewBox', [0,0,icon_w,icon_h].join(' '));
-					
-					$(svgroot).attr({
-						"xmlns": svgns,
-						"width": icon_w,
-						"height": icon_h,
-						"xmlns:xlink": xlinkns,
-						"class": 'svg_icon'
-					});
 
-					// Without cloning, Firefox will make another GET request.
-					// With cloning, causes issue in Opera/Win/Non-EN
-					if(!isOpera) svg = svg.cloneNode(true);
-					
-					svgroot.appendChild(svg);
-			
+					var svg = elem.getElementsByTagNameNS(svgns, 'svg')[0];
+					var svgcontent = '<svg id="root" width="'+icon_w+'" height="'+icon_h+'" viewBox="0 0 '+icon_w+' '+icon_h+'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svg_icon">' + (new XMLSerializer()).serializeToString(svg) +'</svg>';
+
 					if(toImage) {
-						// Without cloning, Safari will crash
-						// With cloning, causes issue in Opera/Win/Non-EN
-						var svgcontent = isOpera?svgroot:svgroot.cloneNode(true);
-						temp_holder.empty().append(svgroot);
-						var str = data_pre + encode64(temp_holder.html());
+						var str = data_pre + encode64(svgcontent);
 						var icon = $(new Image())
-							.attr({'class':'svg_icon', src:str});
+							.attr({'class':'svg_icon', src:str, width:icon_w, height:icon_h});
 					} else {
+						var svgroot = (new DOMParser()).parseFromString(svgcontent,'text/xml').documentElement;
+						console.log(svgroot.tagName);
 						var icon = fixIDs($(svgroot), i);
 					}
 					addIcon(icon, id);
 				});
 			}
-			
+
 			if(opts.placement) {
 				$.each(opts.placement, function(sel, id) {
 					if(!svg_icons[id]) return;
@@ -323,7 +281,6 @@ $(function() {
 				});
 			}
 			if(!fallback) {
-				if(toImage) temp_holder.remove();
 				if(data_el) data_el.remove();
 				testImg.remove();
 			}
@@ -331,23 +288,22 @@ $(function() {
 			if(opts.resize) $.resizeSvgIcons(opts.resize);
 
 			icons_made = true;
-			
+
 			if(opts.callback) opts.callback(svg_icons);
-			
 		}
-		
+
 		function fixIDs(svg_el, svg_num, force) {
 			var defs = svg_el.find('defs');
 			if(!defs.length) return svg_el;
-			
+
 			defs.find('[id]').each(function(i) {
 				var id = this.id;
 				var no_dupes = ($(svgdoc).find('#' + id).length <= 1);
 				if(isOpera) no_dupes = false; // Opera didn't clone svg_el, so not reliable
 				if(!force && no_dupes) return;
 				var new_id = id + svg_num + i;
-				$(this).attr('id', new_id);			
-	
+				$(this).attr('id', new_id);
+
 				svg_el.find('[fill="url(#' + id + ')"]').each(function() {
 					$(this).attr('fill', 'url(#' + new_id + ')');
 				}).end().find('[stroke="url(#' + id + ')"]').each(function() {
@@ -360,7 +316,7 @@ $(function() {
 			});
 			return svg_el;
 		}
-		
+
 		function useFallback() {
 			if(file.indexOf('.svgz') != -1) {
 				var reg_file = file.replace('.svgz','.svg');
@@ -372,7 +328,7 @@ $(function() {
 				makeIcons(false, opts.fallback);
 			}
 		}
-				
+
 		function encode64(input) {
 			// base64 strings are 4/3 larger than the original string
 			if(window.btoa) return window.btoa(input);
@@ -381,35 +337,35 @@ $(function() {
 			var chr1, chr2, chr3;
 			var enc1, enc2, enc3, enc4;
 			var i = 0, p = 0;
-		
+
 			do {
 				chr1 = input.charCodeAt(i++);
 				chr2 = input.charCodeAt(i++);
 				chr3 = input.charCodeAt(i++);
-		
+
 				enc1 = chr1 >> 2;
 				enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
 				enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
 				enc4 = chr3 & 63;
-		
+
 				if (isNaN(chr2)) {
 					enc3 = enc4 = 64;
 				} else if (isNaN(chr3)) {
 					enc4 = 64;
 				}
-		
+
 				output[p++] = _keyStr.charAt(enc1);
 				output[p++] = _keyStr.charAt(enc2);
 				output[p++] = _keyStr.charAt(enc3);
 				output[p++] = _keyStr.charAt(enc4);
 			} while (i < input.length);
-		
+
 			return output.join('');
 		}
 	}
-	
+
 	$.getSvgIcon = function(id) { return svg_icons[id]; }
-	
+
 	$.resizeSvgIcons = function(obj) {
 		// FF2 and older don't detect .svg_icon, so we change it detect svg elems instead
 		var change_sel = !$('.svg_icon:first').length;
@@ -426,5 +382,5 @@ $(function() {
 			});
 		});
 	}
-	
+
 })(jQuery);

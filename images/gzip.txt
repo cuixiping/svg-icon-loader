@@ -1,0 +1,3 @@
+create svgz via gzip command line
+
+> gzip -k -N -9 icons.svg
