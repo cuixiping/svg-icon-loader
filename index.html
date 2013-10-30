@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Svg Icon Loader by cuixiping</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Svg Icon Loader</h1>
+        <h2>A script that will include any amount of SVG images to a web page from one single file.</h2>
+        <a href="https://github.com/cuixiping/svg-icon-loader" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="svg-icon-loader-introduction" class="anchor" href="#svg-icon-loader-introduction"><span class="octicon octicon-link"></span></a>SVG Icon Loader Introduction</h1>
+
+<p>The SVG Icon Loader provides a method for a web interface to use SVG images as icons, while being loaded from a single file. This reduces the amount of HTTP requests, offering the same kind of benefit available with CSS sprites. If your server allows gzipping on SVG files, the file download is made a lot smaller since SVG files compress very well. </p>
+
+<p>This is a mirror of <a href="https://code.google.com/p/svg-icon-loader/">svg-icon-loader</a> from google code.</p>
+
+<h1>
+<a name="support" class="anchor" href="#support"><span class="octicon octicon-link"></span></a>Support</h1>
+
+<p>Successfully uses SVG images in the following browsers: </p>
+
+<ul>
+<li>  Firefox 1.5+*   Opera 9.6+*   Safari 3+*   Chrome 2+*   IE 6+ (with the Chrome Frame plugin)</li>
+</ul><p>In older browsers fallback images will be used instead (if specified) </p>
+
+<h1>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h1>
+
+<p><a href="http://svg-icon-loader.googlecode.com/svn/trunk/demo.html">Sample page</a> </p>
+
+<h1>
+<a name="script" class="anchor" href="#script"><span class="octicon octicon-link"></span></a>Script</h1>
+
+<p>The latest minified stable version (2.0) is available <a href="http://svg-icon-loader.googlecode.com/files/jquery.svgicons-2.0.min.js">here</a>. If you are interested in seeing the latest uncompressed developer version, see <a href="http://svg-icon-loader.googlecode.com/svn/trunk/jquery.svgicons.js">here</a>. </p>
+
+<h1>
+<a name="using-the-script" class="anchor" href="#using-the-script"><span class="octicon octicon-link"></span></a>Using the script</h1>
+
+<ol>
+<li>Create the SVG master file that includes all icons: </li>
+</ol><p>The master SVG icon-containing file is an SVG file that contains  <tt>&lt;g&gt;</tt> elements. Each <tt>&lt;g&gt;</tt> element should contain the markup of an SVG icon. The <tt>&lt;g&gt;</tt> element has an ID that should  correspond with the ID of the HTML element used on the page that should contain  or optionally be replaced by the icon. Additionally, one empty element should be added at the end with id "svg_eof". </p>
+
+<ol>
+<li><p>Optionally create fallback raster images for each SVG icon. </p></li>
+<li><p>Include the jQuery and the SVG Icon Loader scripts on your page. </p></li>
+<li><p>Run $.svgIcons() when the document is ready: </p></li>
+</ol><p>$.svgIcons( file string, options literal); </p>
+
+<p>File is the location of a local SVG or SVGz file. </p>
+
+<p>All options are optional and can include: </p>
+
+<ul>
+<li><p>'w (number)': The icon widths (default: 24px)</p></li>
+<li><p>'h (number)': The icon heights (default: 24px)</p></li>
+<li><p>'fallback (object literal)': List of raster images with each key being the SVG icon ID to replace, and the value the image file name.</p></li>
+<li><p>'fallback_path (string)': The path to use for all images listed under "fallback"     </p></li>
+<li><p>'replace (boolean)': If set to true, HTML elements will be replaced by, rather than include the SVG icon.</p></li>
+<li><p>'placement (object literal)': List with selectors for keys and SVG icon ids&gt; as values. This provides a custom method of adding icons.</p></li>
+<li><p>'callback (function)': A function to call when all icons have been loaded</p></li>
+<li><p>'id_match (boolean)': Automatically attempt to match SVG icon ids with&gt; corresponding HTML id (default: true)</p></li>
+<li><p>'no_img (boolean)': Prevent attempting to convert the icon into an <tt>&lt;img&gt;</tt> element (may be faster, help for browser consistency)</p></li>
+<li><p>'svgz (boolean)': Indicate that the file is an SVGZ file, and thus not to parse as XML. SVGZ files add compression benefits, but getting data from them fails in Firefox 2 and older.</p></li>
+</ul><ol>
+<li>
+<p>To access an icon at a later point without using the callback, use this: </p>
+
+<blockquote>
+<p><tt>$.getSvgIcon(id (string))</tt>. This will return the icon (as jQuery object) with a given ID.</p>
+</blockquote>
+</li>
+<li>
+<p>To resize icons at a later point without using the callback, use this: </p>
+
+<blockquote>
+<p>$.resizeSvgIcons(resizeOptions) (use the same way as the "resize" parameter)</p>
+</blockquote>
+</li>
+</ol><h2>
+<a name="example-usage-1" class="anchor" href="#example-usage-1"><span class="octicon octicon-link"></span></a>Example usage #1</h2>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svg'</span><span class="p">);</span> <span class="c1">// The SVG file that contains all icons</span>
+        <span class="c1">// No options have been set, so all icons will automatically be inserted </span>
+        <span class="c1">// into HTML elements that match the same IDs. </span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="example-usage-2" class="anchor" href="#example-usage-2"><span class="octicon octicon-link"></span></a>Example usage #2</h2>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svg'</span><span class="p">,</span> <span class="p">{</span> <span class="c1">// The SVG file that contains all icons</span>
+                <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">icons</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Custom callback function that sets click</span>
+                                            <span class="c1">// events for each icon</span>
+                        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">icons</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">icon</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">icon</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                                        <span class="nx">alert</span><span class="p">(</span><span class="s1">'You clicked on the icon with id '</span> <span class="o">+</span> <span class="nx">id</span><span class="p">);</span>
+                                <span class="p">});</span>
+                        <span class="p">});</span>
+                <span class="p">}</span>
+        <span class="p">});</span> <span class="c1">//The SVG file that contains all icons</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="example-usage-3" class="anchor" href="#example-usage-3"><span class="octicon octicon-link"></span></a>Example usage #3</h2>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">svgIcons</span><span class="p">(</span><span class="s1">'my_icon_set.svgz'</span><span class="p">,</span> <span class="p">{</span> <span class="c1">// The SVGZ file that contains all icons</span>
+                <span class="nx">w</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>  <span class="c1">// All icons will be 32px wide</span>
+                <span class="nx">h</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>  <span class="c1">// All icons will be 32px high</span>
+                <span class="nx">fallback_path</span><span class="o">:</span> <span class="s1">'icons/'</span><span class="p">,</span>  <span class="c1">// All fallback files can be found here</span>
+                <span class="nx">fallback</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="s1">'#open_icon'</span><span class="o">:</span> <span class="s1">'open.png'</span><span class="p">,</span>  <span class="c1">// The "open.png" will be appended to the</span>
+                                                   <span class="c1">// HTML element with ID "open_icon"</span>
+                        <span class="s1">'#close_icon'</span><span class="o">:</span> <span class="s1">'close.png'</span><span class="p">,</span>
+                        <span class="s1">'#save_icon'</span><span class="o">:</span> <span class="s1">'save.png'</span>
+                <span class="p">},</span>
+                <span class="nx">placement</span><span class="o">:</span> <span class="p">{</span><span class="s1">'.open_icon'</span><span class="p">,</span><span class="s1">'open'</span><span class="p">},</span> <span class="c1">// The "open" icon will be added</span>
+                                                  <span class="c1">// to all elements with class "open_icon"</span>
+                <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">icons</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">icons</span><span class="p">[</span><span class="s1">'open'</span><span class="p">]</span>
+                                <span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+                                <span class="p">.</span><span class="nx">height</span><span class="p">(</span><span class="mi">64</span><span class="p">);</span> <span class="c1">// Sets different width/height for "open" icon </span>
+                <span class="p">},</span>
+                <span class="nx">svgz</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// Indicates that an SVGZ file is being used</span>
+        <span class="p">})</span>
+<span class="p">});</span>
+</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/cuixiping/svg-icon-loader/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/cuixiping/svg-icon-loader/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/cuixiping/svg-icon-loader"></a> is maintained by <a href="https://github.com/cuixiping">cuixiping</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
