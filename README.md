@@ -1,6 +1,6 @@
 # Introduction
 
-The **SVG Icon Loader** provides a method for a web interface to use SVG images as icons, while being loaded from a single file. This reduces the amount of HTTP requests, offering the same kind of benefit available with CSS sprites. If your server allows gzipping on SVG files, the file download is made a lot smaller since SVG files compress very well. This is a mirror of [svg-icon-loader](https://code.google.com/p/svg-icon-loader/) from google code.
+The **SVG Icon Loader** provides a method for a web interface to use SVG images as icons, while being loaded from a single file. This reduces the amount of HTTP requests, offering the same kind of benefit available with CSS sprites. If your server allows gzipping on SVG files, the file download is made a lot smaller since SVG files compress very well. This is a modification of [svg-icon-loader](https://code.google.com/p/svg-icon-loader/) from google code.
 
 [Home Page](http://cuixiping.github.io/svg-icon-loader/)
 
@@ -18,7 +18,7 @@ In older browsers fallback images will be used instead (if specified)
 
 # Script
 
-The latest minified stable version (2.0) is available [here](https://github.com/cuixiping/svg-icon-loader/blob/master/jquery.svgicons.min.js.gz). If you are interested in seeing the latest uncompressed developer version, see [here](https://github.com/cuixiping/svg-icon-loader/blob/master/jquery.svgicons.js). 
+The latest stable version (2.1) is available. [minified(4.8k)](http://cuixiping.github.io/svg-icon-loader/jquery.svgicons-2.1.min.js) or [gzipped(2.1k)](http://cuixiping.github.io/svg-icon-loader/jquery.svgicons-2.1.min.js.gz) or [uncompressed(11.1k)](http://cuixiping.github.io/svg-icon-loader/jquery.svgicons.js) version.
 
 # Using the script
 
